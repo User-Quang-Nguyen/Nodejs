@@ -2,18 +2,16 @@ var express = require("express");
 var router = express.Router();
 var user_md = require("../models/user");
 
-router.get("/", function(req, res) {
-    res.json({"message":"this is admin page"});
+router.get("/signup", function(req, res){
+    res.render("signup", {data: req.params});
 });
 
-router.get("/login", function(req, res){
-    res.render("login2", {data: {}});
-});
-
-router.post("/login", function(req, res){
+router.post("/signup", function(req, res){
     var user = req.body;
 
     user = {
+        first_name : user.first_name,
+        last_name : user.last_name,
         email : user.email,
         password : user.password
     };
@@ -22,7 +20,7 @@ router.post("/login", function(req, res){
 
     var result = user_md.addUser(user);
     if(!result){
-        res.render("login", {data: {error: "Error!"}});
+        res.render("signup", {data: {error: "Error!"}});
     }else{
         res.json({message: "Success!"});
     }

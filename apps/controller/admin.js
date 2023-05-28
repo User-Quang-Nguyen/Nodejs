@@ -26,4 +26,24 @@ router.post("/signup", function(req, res){
     }
 });
 
+router.get("/login", function(req, res){
+    res.render("login.html", {data:{}});
+})
+
+router.post("/login", function(req, res){
+    var user = req.body;
+
+    user = {
+        email : user.email,
+        password : user.password
+    }
+
+    var result = user_md.checkUser(user);
+    if(!result){
+        res.render("login.html", {data: {error: "Error!"}});
+    }else{
+        res.json({message: "Login Success!"});
+    }
+})
+
 module.exports = router;

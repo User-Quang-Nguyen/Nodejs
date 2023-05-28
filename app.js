@@ -8,8 +8,8 @@ var app = express();
 app.use(bodyParse.json());
 
 app.set("views", __dirname + "/apps/views");
-// app.engine('html', engines.mustache);
-// app.set('view engine', 'html');
+app.engine('html', engines.mustache);
+app.set('view engine', 'html');
 app.set("view engine", "ejs");
 
 app.use(bodyParse.urlencoded({extended: true}));
